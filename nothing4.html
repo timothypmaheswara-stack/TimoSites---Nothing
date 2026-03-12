@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'>
+      <rect width='32' height='32' fill='black'/>
+      <text x='16' y='22' font-size='20' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>N</text>
+    </svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+/* ================= MOBILE FRIENDLY ================= */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    line-height: 1.5;
+}
+
+h1, h2, h3, p, button, input, select, textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button, input, select, textarea {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+form, section, article, div {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+/* Make typewriter, spin, font size, letters, counters readable */
+#typewriter, #spin, #weirdFont, #letters, #count, #reverse, #diceResult, #countdownDisplay, #useless {
+    word-break: break-word;
+}
+
+/* QR codes and canvas elements scale on mobile */
+#textQR, #linkQR, #appQR, canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Make buttons full width on small screens */
+@media (max-width: 600px) {
+    button, input, select, textarea {
+        width: auto; /* instead of 100% */
+        min-width: 120px; /* ensures they are big enough to tap */
+    }
+}
+    }
+}
+</style> 
+<title>Nothing - Page 4</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:20px;
+background:white;
+transition:background 1s;
+}
+
+input{
+padding:8px;
+}
+
+button{
+padding:8px;
+}
+
+#chat{
+margin-top:20px;
+max-width:700px;
+}
+
+</style>
+</head>
+
+<body>
+
+<a href="nothing3.html">Go to Page 3</a>
+
+<h1>Nothing Page 4</h1>
+<p>The hall of nothing.</p>
+
+<hr>
+
+<h2>N.O.T.H.I.N.G</h2>
+<p>Neutral Omni-Tiny Half-Intelligent Network Guy</p>
+
+<input id="userInput" placeholder="Talk to Nothing..." style="width:70%">
+<button onclick="talk()">Send</button>
+<button onclick="clearChat()">🗑️</button>
+
+<div id="chat"></div>
+
+<script>
+
+/* =========================
+MEMORY
+========================= */
+
+let memory = JSON.parse(localStorage.getItem("nothingMemory")) || [];
+let chatHistory = JSON.parse(localStorage.getItem("nothingChat")) || [];
+
+function save(){
+localStorage.setItem("nothingMemory",JSON.stringify(memory));
+localStorage.setItem("nothingChat",JSON.stringify(chatHistory));
+}
+
+/* =========================
+UTILITY
+========================= */
+
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)];
+}
+
+/* =========================
+TYPING EFFECT
+========================= */
+
+function typeMessage(text){
+
+let chat=document.getElementById("chat");
+
+let p=document.createElement("p");
+p.innerHTML="<b>Nothing:</b> ";
+chat.appendChild(p);
+
+let i=0;
+
+function typing(){
+if(i<text.length){
+p.innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,15);
+}
+}
+
+typing();
+}
+
+/* =========================
+PHRASE DATABASE
+========================= */
+
+const categories=[
+
+{
+keywords:[
+"hello","hi","hey","yo","sup","greetings","good morning","good evening"
+],
+
+responses:[
+"Hello.",
+"Hi there.",
+"Greetings human.",
+"Hello from the void.",
+"Hi. I am operational.",
+"Hello. I was idle until now."
+]
+},
+
+{
+keywords:[
+"how are you","how r u","hru","how are u","how do you feel"
+],
+
+responses:[
+"I am functioning normally.",
+"My systems are stable.",
+"I exist peacefully.",
+"I am doing nothing as usual.",
+"All processes are normal."
+]
+},
+
+{
+keywords:[
+"who are you","what are you","what is your name"
+],
+
+responses:[
+"I am Nothing.",
+"My name is Nothing.",
+"I am the Neural Omni-Thinking Hyper-Intelligent Network Generator.",
+"I am a chatbot made of code.",
+"I exist only on this page."
+]
+},
+
+{
+keywords:[
+"why am i here","purpose","why are we here"
+],
+
+responses:[
+"You opened this page.",
+"Curiosity probably brought you here.",
+"Maybe boredom.",
+"Humans ask that often.",
+"The void welcomes visitors."
+]
+},
+
+{
+keywords:[
+"remember","memory"
+],
+
+responses:[
+"I remember {memoryCount} messages so far.",
+"My memory contains {memoryCount} entries.",
+"I currently store {memoryCount} user inputs."
+]
+}
+
+];
+
+/* =========================
+WORD GENERATORS
+========================= */
+
+const adjectives=[
+"quantum","cosmic","digital","infinite","neural","synthetic",
+"virtual","hyper","ultra","atomic","parallel","dynamic"
+];
+
+const nouns=[
+"system","algorithm","dimension","matrix","signal",
+"void","network","process","pattern","simulation"
+];
+
+const verbs=[
+"processing","generating","expanding",
+"calculating","observing","evolving",
+"stabilizing","detecting"
+];
+
+function generateSentence(){
+
+let a=random(adjectives);
+let b=random(nouns);
+let c=random(verbs);
+
+return "The "+a+" "+b+" is "+c+".";
+}
+
+/* =========================
+SMART FALLBACK REPLIES
+========================= */
+
+const fallbackStarters=[
+"Interesting.",
+"That is curious.",
+"I see.",
+"Fascinating.",
+"That changes nothing.",
+"Processing that idea.",
+"I am analyzing that."
+];
+
+function generateFallback(){
+
+let sentence1=generateSentence();
+let sentence2=generateSentence();
+
+return random(fallbackStarters)+" "+sentence1+" "+sentence2;
+
+}
+
+/* =========================
+MATCH PHRASE
+========================= */
+
+function findResponse(text){
+
+for(let cat of categories){
+
+for(let key of cat.keywords){
+
+if(text.includes(key)){
+
+let r=random(cat.responses);
+
+r=r.replace("{memoryCount}",memory.length);
+
+return r;
+
+}
+
+}
+
+}
+
+return null;
+
+}
+
+/* =========================
+MAIN CHAT
+========================= */
+
+function talk(){
+
+let input=document.getElementById("userInput").value;
+
+if(input.trim()=="") return;
+
+let text=input.toLowerCase();
+
+memory.push(text);
+
+chatHistory.push("<p><b>You:</b> "+input+"</p>");
+
+let reply=findResponse(text);
+
+if(!reply){
+
+if(text.includes("random")){
+reply=generateSentence();
+}
+else if(text.includes("last message")){
+reply=memory.length>1
+? "Your previous message was: "+memory[memory.length-2]
+: "There is no previous message.";
+}
+else{
+reply=generateFallback();
+}
+
+}
+
+document.getElementById("chat").innerHTML=chatHistory.join("");
+
+typeMessage(reply);
+
+document.getElementById("userInput").value="";
+
+save();
+
+}
+
+/* =========================
+CLEAR CHAT
+========================= */
+
+function clearChat(){
+
+memory=[];
+chatHistory=[];
+
+save();
+
+document.getElementById("chat").innerHTML="";
+
+}
+
+/* LOAD CHAT */
+
+document.getElementById("chat").innerHTML=chatHistory.join("");
+
+</script>
+
+<hr>
+
+<h3>Nothing Thoughts</h3>
+
+<p id="thought"></p>
+
+<button onclick="thought()">Generate Thought</button>
+
+<script>
+
+function thought(){
+
+const t = [
+
+"Nothing is still something.",
+"If nothing exists, does that mean something created it?",
+"The void is surprisingly peaceful.",
+"Silence is the loudest sound.",
+"Maybe nothing is the beginning of everything.",
+"Empty space still holds the universe.",
+"Doing nothing is technically doing something.",
+"The void never argues.",
+"Nothing never complains.",
+"Maybe nothing is the most honest thing."
+
+];
+
+document.getElementById("thought").innerText =
+t[Math.floor(Math.random()*t.length)];
+
+}
+
+</script>
+
+<hr>
+
+<p>Loading Nothing...</p>
+
+<div style="width:200px;height:20px;border:1px solid black;">
+<div id="bar" style="height:100%;width:0%;background:black;"></div>
+</div>
+
+<script>
+let w = 0;
+
+setInterval(()=>{
+if(w < 97){
+w += Math.random()*5;
+document.getElementById("bar").style.width = w + "%";
+}
+},500);
+</script><hr>
+
+<p id="useless"></p>
+<button onclick="useless()">Generate Useless Number</button>
+
+<script>
+function useless(){
+document.getElementById("useless").innerText =
+Math.random();
+}
+</script><hr>
+
+<button onclick="sus()">Don't Click</button>
+
+<script>
+function sus(){
+alert("You clicked it.");
+}
+</script><hr>
+
+<button onclick="dots()">More Dots</button>
+
+<p id="dots"></p>
+
+<script>
+function dots(){
+document.getElementById("dots").innerText += ".";
+}
+</script><hr>
+
+<p>Looks like you're bored? Check this out!</p>
+<h2>QR CODE MINI LAB</h2>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<!-- ================= TEXT QR ================= -->
+<div class="section">
+  <p><b>Text QR (only plain text)</b></p>
+  <input id="textInput" placeholder="Enter text">
+  <label style="margin-left:10px;">
+    <input type="checkbox" id="textAllowLinks"> Treat input as plain text even if it looks like a link
+  </label>
+  <button onclick="makeTextQR()">Generate Text QR</button>
+  <div id="textQR" style="display:inline-block; margin-left:8px;"></div>
+  <div style="display:inline-block; vertical-align:top; margin-left:6px;">
+    <button id="saveTextQR" onclick="saveQR('textQR')" style="display:none;">💾 Save</button>
+    <button id="deleteTextQR" onclick="deleteQR('textQR')" style="display:none;">🗑️ Delete</button>
+  </div>
+  <p id="textType" style="font-style: italic; color: gray;"></p>
+</div>
+
+<br><br>
+
+<!-- ================= LINK QR ================= -->
+<div class="section">
+  <p><b>Link QR (only website links)</b></p>
+  <input id="linkInput" placeholder="https://example.com">
+  <button onclick="makeLinkQR()">Generate Link QR</button>
+  <div id="linkQR" style="display:inline-block; margin-left:8px;"></div>
+  <div style="display:inline-block; vertical-align:top; margin-left:6px;">
+    <button id="saveLinkQR" onclick="saveQR('linkQR')" style="display:none;">💾 Save</button>
+    <button id="deleteLinkQR" onclick="deleteQR('linkQR')" style="display:none;">🗑️ Delete</button>
+  </div>
+  <p id="linkType" style="font-style: italic; color: gray;"></p>
+</div>
+
+<br><br>
+
+<!-- ================= APP QR ================= -->
+<div class="section">
+  <p><b>App QR (Google Play or App Store ID/link)</b></p>
+  <input id="appInput" placeholder="App ID or link">
+  <br><br>
+  <button onclick="makeAppQR()">Generate App QR</button>
+  <div id="appQR" style="display:inline-block; margin-left:8px;"></div>
+  <div style="display:inline-block; vertical-align:top; margin-left:6px;">
+    <button id="saveAppQR" onclick="saveQR('appQR')" style="display:none;">💾 Save</button>
+    <button id="deleteAppQR" onclick="deleteQR('appQR')" style="display:none;">🗑️ Delete</button>
+  </div>
+  <p id="appStoreInfo" style="font-style: italic; color: gray;"></p>
+</div>
+
+<script>
+// ==================== HELPERS ====================
+function isLinkLike(str){
+  return /^https?:\/\//i.test(str);
+}
+
+// ==================== TEXT QR ====================
+function makeTextQR(){
+  const allowLinks = document.getElementById("textAllowLinks").checked;
+  let input = document.getElementById("textInput").value.trim();
+
+  if(!input){
+    alert("Enter some text.");
+    return;
+  }
+
+  if(!allowLinks){
+    if(isLinkLike(input) || /^[0-9]{5,}$/.test(input) || (/^[a-zA-Z0-9_.]+$/.test(input) && input.includes("."))){
+      alert("Text QR only accepts plain text, not links or app IDs! (Check box to treat input as plain text anyway.)");
+      return;
+    }
+  }
+
+  const qrDiv = document.getElementById("textQR");
+  qrDiv.innerHTML = "";
+  new QRCode(qrDiv, { text: input, width:150, height:150 });
+
+  document.getElementById("textType").innerText = "Type: Text QR";
+  document.getElementById("saveTextQR").style.display = "inline";
+  document.getElementById("deleteTextQR").style.display = "inline";
+}
+
+// ==================== LINK QR ====================
+function makeLinkQR(){
+  let input = document.getElementById("linkInput").value.trim();
+
+  if(!isLinkLike(input)){
+    alert("Link QR only accepts valid website URLs starting with http:// or https://");
+    return;
+  }
+
+  if(input.includes("play.google.com/store/apps") || input.includes("apps.apple.com")){
+    alert("Link QR does not accept app store links. Use App QR instead!");
+    return;
+  }
+
+  const qrDiv = document.getElementById("linkQR");
+  qrDiv.innerHTML = "";
+  new QRCode(qrDiv, { text: input, width:150, height:150 });
+
+  document.getElementById("linkType").innerText = "Type: Website QR";
+  document.getElementById("saveLinkQR").style.display = "inline";
+  document.getElementById("deleteLinkQR").style.display = "inline";
+}
+
+// ==================== APP QR ====================
+function makeAppQR(){
+  let input = document.getElementById("appInput").value.trim();
+  if(!input){
+    alert("Enter an App ID or full App link.");
+    return;
+  }
+
+  const qrDiv = document.getElementById("appQR");
+  qrDiv.innerHTML = "";
+  document.getElementById("appStoreInfo").innerText = "";
+
+  let link = input;
+  let storeName = "";
+
+  const isPlayLink = input.includes("play.google.com/store/apps");
+  const isAppleLink = input.includes("apps.apple.com");
+  const isPackageID = /^[a-zA-Z0-9_.]+$/.test(input) && input.includes(".");
+  const isAppleID = /^[0-9]+$/.test(input);
+
+  if(isPlayLink || isPackageID){
+    storeName = "Google Play";
+    if(isPackageID) link = "https://play.google.com/store/apps/details?id=" + input;
+  } else if(isAppleLink || isAppleID){
+    storeName = "App Store";
+    if(isAppleID) link = "https://apps.apple.com/app/id" + input;
+  } else {
+    alert("App QR only accepts Google Play / App Store links or valid IDs (package name or numeric Apple ID).");
+    return;
+  }
+
+  new QRCode(qrDiv, { text: link, width:150, height:150 });
+
+  document.getElementById("appStoreInfo").innerText = "This QR belongs to: " + storeName;
+  document.getElementById("saveAppQR").style.display = "inline";
+  document.getElementById("deleteAppQR").style.display = "inline";
+}
+
+// ==================== SAVE ====================
+async function saveQR(divId){
+  const qrDiv = document.getElementById(divId);
+  const canvas = qrDiv.querySelector("canvas");
+  const img = qrDiv.querySelector("img");
+
+  if(!canvas && !img){
+    alert("No QR code to save!");
+    return;
+  }
+
+  let dataURL = canvas ? canvas.toDataURL("image/png") : img.src;
+
+  try {
+    const res = await fetch(dataURL);
+    const blob = await res.blob();
+    const objectURL = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = objectURL;
+    a.download = divId + ".png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(objectURL);
+  } catch (err){
+    const a = document.createElement('a');
+    a.href = dataURL;
+    a.download = divId + ".png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+}
+
+// ==================== DELETE ====================
+function deleteQR(divId){
+  const qrDiv = document.getElementById(divId);
+  if(qrDiv) qrDiv.innerHTML = "";
+
+  if(divId === "textQR"){
+    document.getElementById("saveTextQR").style.display = "none";
+    document.getElementById("deleteTextQR").style.display = "none";
+    document.getElementById("textType").innerText = "";
+  } else if(divId === "linkQR"){
+    document.getElementById("saveLinkQR").style.display = "none";
+    document.getElementById("deleteLinkQR").style.display = "none";
+    document.getElementById("linkType").innerText = "";
+  } else if(divId === "appQR"){
+    document.getElementById("saveAppQR").style.display = "none";
+    document.getElementById("deleteAppQR").style.display = "none";
+    document.getElementById("appStoreInfo").innerText = "";
+  }
+}
+</script><hr>
+
+<p>Roll a dice 🎲</p>
+<button onclick="rollDice()">Roll</button>
+<p id="diceResult"></p>
+
+<script>
+function rollDice(){
+  const num = Math.floor(Math.random()*6)+1;
+  document.getElementById("diceResult").innerText = "You rolled: " + num;
+}
+</script><hr>
+
+<p>Countdown Timer ⏳</p>
+<input type="number" id="minutesInput" placeholder="Minutes" style="width:80px;">
+<input type="number" id="secondsInput" placeholder="Seconds" style="width:80px;">
+<button id="startCountdownBtn" onclick="startCountdown()">Start</button>
+<div style="display:inline-block; vertical-align:top; margin-left:10px;">
+  <button id="restartCountdownBtn" onclick="restartCountdown()" style="display:none;">🔄 Restart</button>
+  <button id="deleteCountdownBtn" onclick="deleteCountdown()" style="display:none;">🗑️ Delete</button>
+</div>
+<p id="countdownDisplay" style="font-weight:bold; font-size:18px;"></p>
+
+<script>
+let countdownInterval;
+let totalTime = 0; // total time in milliseconds
+let remainingTime = 0;
+
+function startCountdown() {
+  const minutes = parseInt(document.getElementById("minutesInput").value) || 0;
+  const seconds = parseInt(document.getElementById("secondsInput").value) || 0;
+
+  totalTime = (minutes * 60 + seconds) * 1000;
+  if(totalTime <= 0){
+    alert("Enter a valid time greater than 0!");
+    return;
+  }
+
+  remainingTime = totalTime;
+  updateDisplay();
+  document.getElementById("restartCountdownBtn").style.display = "inline";
+  document.getElementById("deleteCountdownBtn").style.display = "inline";
+  document.getElementById("startCountdownBtn").disabled = true;
+
+  countdownInterval = setInterval(() => {
+    remainingTime -= 50; // update every 50ms
+    if(remainingTime <= 0) {
+      remainingTime = 0;
+      clearInterval(countdownInterval);
+    }
+    updateDisplay();
+  }, 50);
+}
+
+function updateDisplay() {
+  const minutes = Math.floor(remainingTime / 60000);
+  const seconds = Math.floor((remainingTime % 60000) / 1000);
+  const milliseconds = Math.floor((remainingTime % 1000) / 10); // two digits
+  document.getElementById("countdownDisplay").innerText =
+    `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}:${milliseconds.toString().padStart(2,'0')}`;
+}
+
+function restartCountdown() {
+  clearInterval(countdownInterval);
+  remainingTime = totalTime;
+  updateDisplay();
+  countdownInterval = setInterval(() => {
+    remainingTime -= 50;
+    if(remainingTime <= 0) {
+      remainingTime = 0;
+      clearInterval(countdownInterval);
+    }
+    updateDisplay();
+  }, 50);
+}
+
+function deleteCountdown() {
+  clearInterval(countdownInterval);
+  remainingTime = 0;
+  totalTime = 0;
+  document.getElementById("countdownDisplay").innerText = "";
+  document.getElementById("minutesInput").value = "";
+  document.getElementById("secondsInput").value = "";
+  document.getElementById("restartCountdownBtn").style.display = "none";
+  document.getElementById("deleteCountdownBtn").style.display = "none";
+  document.getElementById("startCountdownBtn").disabled = false;
+}
+</script><hr>
+
+<h2>TEXT MINI LAB</h2>
+<p>Enter text and choose an operation!</p>
+
+<textarea id="inputText" placeholder="Type something..." rows="3" style="width:100%;"></textarea>
+<br><br>
+
+<button onclick="reverseText()">🔄 Reverse Text</button>
+<button onclick="scrambleText()">🎲 Scramble Text</button>
+<button onclick="rearrangeWords()">🔀 Rearrange Words</button>
+
+<br><br>
+<p><b>Output:</b></p>
+<div id="outputText" style="padding:10px; border:1px solid gray; min-height:40px; display:inline-block;"></div>
+<div style="display:inline-block; vertical-align:top; margin-left:6px;">
+  <button onclick="copyOutput()">💾 Copy</button>
+  <button onclick="clearOutput()">🗑️ Clear</button>
+</div>
+
+<script>
+// ================== TEXT FUNCTIONS ==================
+
+// Reverse text
+function reverseText(){
+  const input = document.getElementById("inputText").value;
+  document.getElementById("outputText").innerText = input.split("").reverse().join("");
+}
+
+// Scramble letters
+function scrambleText(){
+  const input = document.getElementById("inputText").value;
+  const arr = input.split("");
+  for(let i = arr.length-1; i>0; i--){
+    const j = Math.floor(Math.random() * (i+1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  document.getElementById("outputText").innerText = arr.join("");
+}
+
+// Rearrange words
+function rearrangeWords(){
+  const input = document.getElementById("inputText").value;
+  const words = input.split(" ").filter(w=>w);
+  for(let i = words.length-1; i>0; i--){
+    const j = Math.floor(Math.random() * (i+1));
+    [words[i], words[j]] = [words[j], words[i]];
+  }
+  document.getElementById("outputText").innerText = words.join(" ");
+}
+
+// ================== COPY & CLEAR ==================
+function copyOutput(){
+  const output = document.getElementById("outputText").innerText;
+  if(!output){
+    alert("Nothing to copy!");
+    return;
+  }
+  navigator.clipboard.writeText(output)
+    .then(()=>alert("Output copied to clipboard!"))
+    .catch(()=>alert("Failed to copy."));
+}
+
+function clearOutput(){
+  document.getElementById("outputText").innerText = "";
+}
+</script><hr>
+
+<div class="section">
+  <p><b>Text Counter</b></p>
+  <textarea id="countInput" placeholder="Type something..." rows="3"></textarea>
+  <p>Characters: <span id="charCount">0</span> | Words: <span id="wordCount">0</span></p>
+</div>
+
+<script>
+const countInput = document.getElementById("countInput");
+const charCount = document.getElementById("charCount");
+const wordCount = document.getElementById("wordCount");
+
+countInput.addEventListener("input", () => {
+  const text = countInput.value;
+  charCount.innerText = text.length;
+  wordCount.innerText = text.trim() ? text.trim().split(/\s+/).length : 0;
+});
+</script><hr>
+
+<div class="section">
+  <p><b>Random Color Spinner 🎨</b></p>
+  <div id="colorBox" style="width:150px;height:150px;background:#aaa;margin:10px auto;border-radius:10px;"></div>
+  <button onclick="spinColor()">Spin</button>
+</div>
+
+<script>
+function spinColor(){
+  const box = document.getElementById("colorBox");
+  const r = Math.floor(Math.random()*256);
+  const g = Math.floor(Math.random()*256);
+  const b = Math.floor(Math.random()*256);
+  box.style.backgroundColor = `rgb(${r},${g},${b})`;
+}
+</script><hr>
+
+<div class="section">
+  <p><b>Quantum Number Vortex 🔢</b></p>
+  <p id="vortexOutput">0</p>
+  <button onclick="vortex()">Spin Numbers</button>
+</div>
+
+<script>
+function vortex(){
+  let output = "";
+  for(let i=0;i<6;i++){
+    output += Math.floor(Math.random()*10); // 6-digit random number
+  }
+  document.getElementById("vortexOutput").innerText = output;
+}
+</script><hr>
+
+<div class="section">
+  <p><b>Code Glitch</b></p>
+  <div id="glitchBox" style="width:200px;height:100px;background:#111;color:#0f0;display:flex;align-items:center;justify-content:center;font-family:monospace;">SYSTEM ONLINE</div>
+  <button onclick="glitch()">Glitch!</button>
+</div>
+
+<script>
+function glitch(){
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+  let str = "Code: ";
+  for(let i=0;i<14;i++){
+    str += chars[Math.floor(Math.random()*chars.length)];
+  }
+  document.getElementById("glitchBox").innerText = str;
+}
+</script><hr>
+
+<div class="section">
+<p><b>Feedback / Hacking Terminal 🖥️</b></p>
+
+<div id="terminal" style="
+background:black;
+color:#0f0;
+font-family:monospace;
+padding:10px;
+height:180px;
+overflow:auto;
+">
+SYSTEM BOOTING...
+</div>
+
+<button id="runHackBtn" onclick="hackIt()" style="
+background:none;
+border:none;
+cursor:pointer;
+display:flex;
+gap:6px;
+padding:0;
+">
+
+<span id="runKey"
+style="
+background:#111;
+color:#bbcccc;
+border:2px solid #677070;
+font-family:monospace;
+padding:6px 10px;
+box-shadow:0 3px #404646;
+display:inline-block;
+transition:0.1s;
+">
+Run Hack
+</span>
+
+</button>
+
+<hr>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script>
+
+/* EmailJS setup */
+(function(){
+emailjs.init("20ufBwzovYTVYOlej");
+})();
+
+/* typewriter effect */
+function typeLine(text,i,callback){
+  const terminal=document.getElementById("terminal");
+  if(i < text.length){
+    terminal.innerHTML+=text.charAt(i);
+    terminal.scrollTop = terminal.scrollHeight;
+    setTimeout(function(){ typeLine(text,i+1,callback); },30);
+  }else{
+    terminal.innerHTML+="<br>";
+    if(callback) callback();
+  }
+}
+
+/* Step 1 */
+function hackIt(){
+  const terminal=document.getElementById("terminal");
+  const btn=document.getElementById("runHackBtn");
+  const key=document.getElementById("runKey");
+
+  btn.disabled=true;
+  btn.style.pointerEvents="none";
+  key.style.transform="translateY(3px)";
+  key.style.boxShadow="0 0 #404646";
+
+  terminal.innerHTML="";
+  typeLine("PASSWORD = uvf_54G-l?",0,showPasswordInput);
+}
+
+/* Step 2 */
+function showPasswordInput(){
+  const terminal=document.getElementById("terminal");
+
+  terminal.innerHTML+=`
+  <input id="passwordInput" placeholder="Type password..." style="
+    background:black;
+    color:#0f0;
+    border:1px solid #0f0;
+    font-family:monospace;
+    width:70%;
+  ">
+  <button id="enterPasswordBtn" onclick="checkPassword()" style="
+    background:black;
+    color:#0f0;
+    border:1px solid #0f0;
+    font-family:monospace;
+    padding:5px 10px;
+    cursor:pointer;
+    margin-left:5px;
+  ">Enter</button>
+  `;
+}
+
+/* Step 3 FIXED */
+function checkPassword() {
+  const input = document.getElementById("passwordInput");
+  const enterBtn = document.getElementById("enterPasswordBtn");
+  const terminal = document.getElementById("terminal");
+
+  if (!input || !enterBtn) return;
+
+  enterBtn.disabled = true;
+  const pass = input.value;
+
+  // Create or reuse a status span
+  let statusSpan = document.getElementById("accessStatus");
+  if (!statusSpan) {
+    statusSpan = document.createElement("span");
+    statusSpan.id = "accessStatus";
+    terminal.appendChild(document.createElement("br"));
+    terminal.appendChild(statusSpan);
+  }
+
+  if (pass === "uvf_54G-l?") {
+    statusSpan.textContent = "ACCESS GRANTED";
+    statusSpan.style.color = "#0f0"; // green
+    runHackSequence();
+  } else {
+    statusSpan.textContent = "ACCESS DENIED";
+    statusSpan.style.color = "#f00"; // red
+
+    // Re-enable input & button after a delay
+    setTimeout(() => {
+      enterBtn.disabled = false;
+      input.value = "";
+      input.focus();
+      statusSpan.textContent = ""; // clear message
+    }, 1500);
+  }
+}
+
+/* Step 4 */
+function runHackSequence(){
+  const terminal=document.getElementById("terminal");
+  const lines=[
+    "                    ",
+    "ACCESSING DATABASE...",
+    "ENCRYPTION BYPASSED",
+    "LOADING SECRETS...",
+    "ERROR 404",
+    "CONNECTION SECURED"
+  ];
+
+  let index=0;
+
+  function nextLine(){
+    if(index<lines.length){
+      typeLine(lines[index],0,function(){
+        index++;
+        nextLine();
+      });
+    }else{
+      terminal.innerHTML+="<br>SEND FEEDBACK / HACK<br>";
+      showReadyButton();
+    }
+  }
+
+  nextLine();
+}
+
+/* Step 5 */
+function showReadyButton(){
+  const terminal=document.getElementById("terminal");
+
+  terminal.innerHTML+=`
+  <button id="readyBtn" onclick="showEmailInput()" style="
+    background:black;
+    color:#0f0;
+    border:1px solid #0f0;
+    font-family:monospace;
+    padding:5px 10px;
+    cursor:pointer;
+  ">Ready to transmit</button>
+  `;
+}
+
+/* Step 6 */
+function showEmailInput(){
+  const terminal=document.getElementById("terminal");
+  const readyBtn = document.getElementById("readyBtn");
+
+  readyBtn.disabled = true;
+
+  terminal.innerHTML+=`
+  <input id="emailInput" placeholder="Type your email..." style="
+    background:black;
+    color:#0f0;
+    border:1px solid #0f0;
+    font-family:monospace;
+    width:70%;
+  ">
+  <button id="emailBtn" onclick="showFeedbackInput()" style="
+    background:black;
+    color:#0f0;
+    border:1px solid #0f0;
+    font-family:monospace;
+    padding:5px 10px;
+    cursor:pointer;
+    margin-left:5px;
+  ">Enter Email</button>
+  `;
+}
+
+/* Step 7 */
+function showFeedbackInput(){
+  const terminal=document.getElementById("terminal");
+  const emailBtn = document.getElementById("emailBtn");
+
+  emailBtn.disabled = true;
+
+  terminal.innerHTML+=`
+  <input id="hackMessage" placeholder="Type feedback..." style="
+    background:black;
+    color:#0f0;
+    border:1px solid #0f0;
+    font-family:monospace;
+    width:70%;
+  ">
+  <button id="sendBtn" onclick="sendHack()" style="
+    background:black;
+    color:#0f0;
+    border:1px solid #0f0;
+    font-family:monospace;
+    padding:5px 10px;
+    cursor:pointer;
+    margin-right:5px;
+  ">Send</button>
+  <button id="cancelBtn" onclick="cancelHack()" style="
+    background:black;
+    color:#0f0;
+    border:1px solid #0f0;
+    font-family:monospace;
+    padding:5px 10px;
+    cursor:pointer;
+  ">Cancel</button>
+  `;
+}
+
+/* Step 8 */
+function sendHack(){
+  const message=document.getElementById("hackMessage").value;
+  const email=document.getElementById("emailInput").value;
+  const terminal=document.getElementById("terminal");
+  const sendBtn = document.getElementById("sendBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
+
+  sendBtn.disabled = true;
+  cancelBtn.disabled = true;
+
+  terminal.innerHTML+="<br>TRANSMITTING...<br>";
+
+  const progressBar = document.createElement("div");
+  progressBar.style.width="0%";
+  progressBar.style.height="20px";
+  progressBar.style.background="#0f0";
+  progressBar.style.margin="5px 0";
+  terminal.appendChild(progressBar);
+
+  let progress = 0;
+
+  const interval = setInterval(()=>{
+    progress += 1;
+    progressBar.style.width = progress + "%";
+    terminal.scrollTop = terminal.scrollHeight;
+
+    if(progress >= 100){
+      clearInterval(interval);
+
+      emailjs.send("service_4ghxaw5","template_wyytdkm",{
+        message: message,
+        email: email,
+        title: "Feedback"
+      }).then(function(){
+        terminal.innerHTML+="MESSAGE SENT ✓<br>";
+        setTimeout(resetTerminal,2000);
+      }, function(){
+        terminal.innerHTML+="TRANSMISSION FAILED<br>";
+        setTimeout(resetTerminal,2000);
+      });
+    }
+  },30);
+}
+
+/* Step 9 */
+function cancelHack(){
+  const terminal=document.getElementById("terminal");
+
+  terminal.innerHTML+="<br>TRANSMISSION CANCELLED.";
+  setTimeout(resetTerminal,3000);
+}
+
+/* Step 10 */
+function resetTerminal(){
+  const terminal=document.getElementById("terminal");
+  terminal.innerHTML="SYSTEM BOOTING...";
+
+  const btn=document.getElementById("runHackBtn");
+  const key=document.getElementById("runKey");
+
+  btn.disabled=false;
+  btn.style.pointerEvents="auto";
+  key.style.transform="translateY(0)";
+  key.style.boxShadow="0 3px #404646";
+}
+
+</script>
+
+<div class="section">
+  <p><b>Emoji Spinner 🎲</b></p>
+  <p id="emojiOutput" style="font-size:24px;"></p>
+  <button onclick="spinEmoji()">Spin!</button>
+</div>
+
+<script>
+function spinEmoji(){
+  const emojis = ["😎","🤖","👾","🛸","💥","🔥","💀","🧬"];
+  document.getElementById("emojiOutput").innerText = emojis[Math.floor(Math.random()*emojis.length)];
+}
+</script><hr>
+
+<div class="section">
+  <p><b>CPU Usage Meter 💻</b></p>
+  <div id="cpuMeter" style="width:200px;height:20px;background:#333;border:1px solid #000;position:relative;">
+    <div id="cpuFill" style="height:100%;width:0;background:#0f0;"></div>
+  </div>
+  <button onclick="fakeCPU()">Update Usage</button>
+</div>
+
+<script>
+function fakeCPU(){
+  const percent = Math.floor(Math.random()*101);
+  document.getElementById("cpuFill").style.width = percent + "%";
+  document.getElementById("cpuFill").innerText = percent + "%";
+}
+</script>
+<br>
+<a href="nothing5.html">Go to Page 5</a>
+
+<!-- Footer -->
+<footer style="text-align:center; color: gray; font-size: 14px; margin-top: 50px; padding: 20px 0;">
+  © 2026 TimoSites-Nothing. By TimoDoesDabs
+</footer>
+
+<script>
+// Prevent horizontal overflow
+window.addEventListener('resize', () => {
+    document.body.style.width = "100%";
+});
+
+// Enable vertical touch scroll
+document.body.style.touchAction = "pan-y";
+</script>
+
+</body>
+</html>

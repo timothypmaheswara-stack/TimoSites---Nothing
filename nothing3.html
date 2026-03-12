@@ -1,0 +1,379 @@
+<!DOCTYPE html><html>
+<head>
+    <link rel="icon" href="data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'>
+      <rect width='32' height='32' fill='black'/>
+      <text x='16' y='22' font-size='20' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>N</text>
+    </svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+/* ================= MOBILE FRIENDLY ================= */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    line-height: 1.5;
+}
+
+h1, h2, h3, p, button, input, select, textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button, input, select, textarea {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+form, section, article, div {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+/* Make typewriter, spin, font size, letters, counters readable */
+#typewriter, #spin, #weirdFont, #letters, #count, #reverse, #diceResult, #countdownDisplay, #useless {
+    word-break: break-word;
+}
+
+/* QR codes and canvas elements scale on mobile */
+#textQR, #linkQR, #appQR, canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Make buttons full width on small screens */
+@media (max-width: 600px) {
+    button, input, select, textarea {
+        width: auto; /* instead of 100% */
+        min-width: 120px; /* ensures they are big enough to tap */
+    }
+}
+    }
+}
+</style> 
+<title>Nothing - Page 3</title>
+<style>
+body{
+font-family: Arial;
+padding:20px;
+}
+
+section{
+margin-bottom:40px;
+}
+
+#runBtn{
+padding:10px;
+}
+
+body{
+transition: background 1s ease;
+}
+
+*{
+transition: all 0.3s;
+}
+
+#bg1, #bg2{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+transition:opacity 1s;
+}
+
+#bg2{
+opacity:0;
+}
+</style>
+</head>
+
+<body>
+
+<a href="nothing2.html">Go to Page 2</a>
+
+<h1>Nothing Page 3</h1>
+<p>Stop, there's nothing</p>
+
+<hr>
+
+<section>
+
+<p id="clock"></p>
+<p>Looks like you need to know the time...</p>
+
+<script>
+setInterval(()=>{
+document.getElementById("clock").innerText=new Date().toLocaleTimeString();
+},1000);
+</script>
+
+<hr>
+
+<input id="copyText" value="Invisible →  ‌‌‎ ">
+<button onclick="
+navigator.clipboard.writeText(document.getElementById('copyText').value)
+">
+Copy Text
+</button>
+
+<hr>
+
+<button onclick="randomBackground()">
+Random Background
+</button>
+<button id="clearBackground" style="display:none;">🗑️</button>
+
+<script>
+function randomBackground(){
+document.body.style.background='hsl('+Math.random()*360+',70%,80%)';
+document.getElementById("clearBackground").style.display="inline";
+}
+
+document.getElementById("clearBackground").onclick=function(){
+document.body.style.background="white";
+this.style.display="none";
+}
+</script>
+
+<hr>
+
+<p id="fontTest">Nothing in style</p>
+
+<button onclick="
+let f=['monospace','cursive','fantasy','serif','sans-serif'];
+document.getElementById('fontTest').style.fontFamily=f[Math.floor(Math.random()*f.length)];
+">
+Random Font
+</button>
+
+<hr>
+
+<p id="loadText">Ready</p>
+
+<button onclick="
+let t=document.getElementById('loadText');
+t.innerText='Loading nothing...';
+setTimeout(()=>t.innerText='Done loading nothing',2000);
+">
+Load Nothing
+</button>
+
+<hr>
+
+<p id="secret">Nothing secret here</p>
+
+<button onclick="
+let s=document.getElementById('secret');
+s.style.display=s.style.display=='none'?'block':'none';
+">
+Hide / Show
+</button>
+
+<hr>
+
+<p id="emojiRain"></p>
+
+<button onclick="
+let e=['😂','😎','🔥','🗿','👀'];
+document.getElementById('emojiRain').innerText=
+Array(20).fill(0).map(()=>e[Math.floor(Math.random()*e.length)]).join(' ');
+">
+Emoji Rain
+</button>
+
+<hr>
+
+<progress id="fakeLoad" value="0" max="100"></progress>
+<button onclick="startFake()">Start Loading Nothing</button>
+
+<script>
+function startFake(){
+let bar = document.getElementById("fakeLoad");
+bar.value = 0;
+
+let i = setInterval(function(){
+
+bar.value += Math.random()*10;
+
+if(bar.value >= 100){
+clearInterval(i);
+alert("Loading complete. Nothing loaded.");
+}
+
+},200);
+}
+</script>
+
+<hr>
+
+<button onclick="randomTitle()">Random Title</button>
+
+<script>
+function randomTitle(){
+
+const titles = [
+"Nothing happening",
+"Still nothing",
+"Why are you here",
+"Loading nothing",
+"TimoSites chaos",
+"Nothing - Page 3"
+];
+
+document.title =
+titles[Math.floor(Math.random()*titles.length)];
+
+}
+</script>
+
+<hr>
+
+<button onclick="shake()">Shake Page</button>
+
+<script>
+function shake(){
+
+let i = 0;
+
+let s = setInterval(function(){
+
+document.body.style.transform =
+"translate("+(Math.random()*10-5)+"px,"+(Math.random()*10-5)+"px)";
+
+i++;
+
+if(i>20){
+clearInterval(s);
+document.body.style.transform="none";
+}
+
+},30);
+
+}
+</script>
+
+<hr>
+
+<button onclick="gradient()">Random Gradient</button>
+<button id="clearGradient" style="display:none;">🗑️</button>
+
+<div id="bg1"></div>
+<div id="bg2"></div>
+
+<script>
+
+let toggle = false;
+
+function randomGradient(){
+return "linear-gradient("+Math.random()*360+"deg, hsl("+Math.random()*360+",70%,70%), hsl("+Math.random()*360+",70%,70%))";
+}
+
+function gradient(){
+
+const bg1 = document.getElementById("bg1");
+const bg2 = document.getElementById("bg2");
+const trash = document.getElementById("clearGradient");
+
+trash.style.display = "inline";
+
+if(toggle){
+
+bg1.style.background = randomGradient();
+bg1.style.opacity = 1;
+bg2.style.opacity = 0;
+
+}else{
+
+bg2.style.background = randomGradient();
+bg2.style.opacity = 1;
+bg1.style.opacity = 0;
+
+}
+
+toggle = !toggle;
+
+}
+
+document.getElementById("clearGradient").onclick = function(){
+
+const bg1 = document.getElementById("bg1");
+const bg2 = document.getElementById("bg2");
+
+bg1.style.opacity = 0;
+bg2.style.opacity = 0;
+
+setTimeout(function(){
+
+bg1.style.background = "";
+bg2.style.background = "";
+document.body.style.background = "white";
+
+},1000);
+
+this.style.display = "none";
+
+}
+
+</script>
+
+<hr>
+
+<p id="fact"></p>
+<button onclick="fact()">Generate Fact</button>
+
+<script>
+
+function fact(){
+
+const facts = [
+"Nothing is still nothing.",
+"This fact is useless.",
+"You clicked a button.",
+"This website exists.",
+"Nothing has changed."
+];
+
+document.getElementById("fact").innerText =
+facts[Math.floor(Math.random()*facts.length)];
+
+}
+
+</script>
+
+<hr>
+
+<a href="nothing4.html">Go to Page 4</a>
+
+<!-- Footer -->
+<footer style="text-align:center; color: gray; font-size: 14px; margin-top: 50px; padding: 20px 0;">
+  © 2026 TimoSites-Nothing. By TimoDoesDabs
+</footer>
+
+<script>
+// Prevent horizontal overflow
+window.addEventListener('resize', () => {
+    document.body.style.width = "100%";
+});
+
+// Enable vertical touch scroll
+document.body.style.touchAction = "pan-y";
+</script>
+
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'>
+      <rect width='32' height='32' fill='black'/>
+      <text x='16' y='22' font-size='20' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>N</text>
+    </svg>">
+
+<meta charset="UTF-8">
+<title>Reaction Speed Game</title>
+
+<style>
+
+/* ================= MOBILE FRIENDLY ================= */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    line-height: 1.5;
+    background:#222;
+    color:white;
+    text-align:center;
+}
+
+h1, h2, h3, p, button, input, select, textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button, input, select, textarea {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+form, section, article, div {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+#textQR, #linkQR, #appQR, canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+@media (max-width: 600px) {
+    button, input, select, textarea {
+        width: auto;
+        min-width: 120px;
+    }
+}
+
+/* ================= TOP TAB ================= */
+
+#topTab{
+display:flex;
+flex-wrap:wrap;
+gap:5px;
+justify-content:center;
+margin-bottom:10px;
+}
+
+#topTab button{
+background:#444;
+color:white;
+border:none;
+border-radius:6px;
+}
+
+/* ================= GAME ================= */
+
+#gameBox{
+width:350px;
+max-width:90vw;
+height:300px;
+margin:auto;
+margin-top:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+border-radius:12px;
+background:red;
+user-select:none;
+cursor:pointer;
+}
+
+#history{
+margin-top:20px;
+max-width:400px;
+margin-left:auto;
+margin-right:auto;
+background:#333;
+padding:10px;
+border-radius:10px;
+}
+
+.reaction{
+padding:6px;
+margin:4px;
+border-radius:6px;
+font-weight:bold;
+}
+
+.extreme{background:#00ff00;color:black;}
+.fast{background:#008000;}
+.average{background:yellow;color:black;}
+.slow{background:orange;color:black;}
+.sleepy{background:red;}
+
+/* ================= GRAPH ================= */
+
+#graphContainer{
+margin-top:20px;
+max-width:500px;
+margin-left:auto;
+margin-right:auto;
+background:#333;
+padding:10px;
+border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>⚡ Reaction Speed Test</h1>
+
+<!-- TOP TAB -->
+<div id="topTab">
+<button id="clearHistory">Clear History</button>
+<button id="clearGraph">Clear Graph</button>
+<button id="clearProgress">Clear Progress</button>
+<button id="goGraph">Go Back to Nothing-Site</button>
+</div>
+
+<div id="gameBox">Press Start</div>
+
+<button id="startBtn">Start</button>
+
+<h3>Reaction: <span id="result">-</span></h3>
+<h3>Best Time: <span id="best">-</span></h3>
+
+<div id="history">
+<h3>Reaction History</h3>
+<div id="historyList"></div>
+</div>
+
+<div id="graphContainer">
+<h3>Reaction Graph</h3>
+<canvas id="graph" width="400" height="200"></canvas>
+</div>
+
+<script>
+
+let gameBox=document.getElementById("gameBox")
+let startBtn=document.getElementById("startBtn")
+
+let startTime=0
+let waiting=false
+let ready=false
+let timer=null
+
+let best=localStorage.getItem("bestReaction")
+let history=JSON.parse(localStorage.getItem("reactionHistory"))||[]
+
+let graphData=JSON.parse(localStorage.getItem("reactionGraph"))||[]
+
+if(best){
+document.getElementById("best").textContent=best+" ms"
+}
+
+renderHistory()
+drawGraph()
+
+function renderHistory(){
+
+let list=document.getElementById("historyList")
+list.innerHTML=""
+
+history.forEach(r=>{
+
+let div=document.createElement("div")
+div.classList.add("reaction")
+
+if(r<150) div.classList.add("extreme")
+else if(r<250) div.classList.add("fast")
+else if(r<350) div.classList.add("average")
+else if(r<450) div.classList.add("slow")
+else div.classList.add("sleepy")
+
+div.textContent=r+" ms"
+
+list.prepend(div)
+
+})
+
+}
+
+function drawGraph(){
+
+let canvas=document.getElementById("graph")
+let ctx=canvas.getContext("2d")
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+let paddingLeft = 40
+let paddingBottom = 25
+let paddingTop = 10
+let paddingRight = 10
+
+let graphWidth = canvas.width - paddingLeft - paddingRight
+let graphHeight = canvas.height - paddingTop - paddingBottom
+
+ctx.strokeStyle="white"
+ctx.fillStyle="white"
+ctx.font="12px Arial"
+
+/* ===== Y AXIS NUMBERS ===== */
+
+let yLabels=[350,340,330,320,310,300,290,280,270,260,250]
+
+yLabels.forEach((val,i)=>{
+
+let y=paddingTop+(i/(yLabels.length-1))*graphHeight
+
+ctx.fillText(val+" |",5,y+4)
+
+})
+
+/* ===== X AXIS LINE ===== */
+
+ctx.beginPath()
+ctx.moveTo(paddingLeft,canvas.height-paddingBottom)
+ctx.lineTo(canvas.width-paddingRight,canvas.height-paddingBottom)
+ctx.stroke()
+
+/* ===== X AXIS NUMBERS ===== */
+
+for(let i=0;i<graphData.length;i++){
+
+let x=paddingLeft+(i/(graphData.length-1||1))*graphWidth
+
+ctx.fillText(i+1,x-3,canvas.height-5)
+
+}
+
+/* ===== GRAPH LINE ===== */
+
+if(graphData.length<2) return
+
+ctx.beginPath()
+
+graphData.forEach((val,i)=>{
+
+let x=paddingLeft+(i/(graphData.length-1))*graphWidth
+
+let normalized=(val-250)/(350-250)
+normalized=Math.max(0,Math.min(1,normalized))
+
+let y=paddingTop+(1-normalized)*graphHeight
+
+if(i==0) ctx.moveTo(x,y)
+else ctx.lineTo(x,y)
+
+})
+
+ctx.strokeStyle="lime"
+ctx.lineWidth=2
+ctx.stroke()
+
+}
+startBtn.onclick=function(){
+
+if(waiting||ready) return
+
+gameBox.style.background="red"
+gameBox.textContent="Wait..."
+
+waiting=true
+ready=false
+
+if(timer) clearTimeout(timer)
+
+let delay=2000+Math.random()*3000
+
+timer=setTimeout(()=>{
+
+gameBox.style.background="lime"
+gameBox.textContent="TAP!"
+
+startTime=performance.now()
+
+ready=true
+waiting=false
+
+},delay)
+
+}
+
+gameBox.onclick=function(){
+
+if(waiting){
+
+gameBox.style.background="orange"
+gameBox.textContent="Too Early!"
+
+document.getElementById("result").textContent="Fail"
+
+waiting=false
+clearTimeout(timer)
+
+return
+}
+
+if(ready){
+
+let reaction=Math.round(performance.now()-startTime)
+
+document.getElementById("result").textContent=reaction+" ms"
+
+gameBox.style.background="#444"
+gameBox.textContent="Press Start"
+
+ready=false
+
+history.push(reaction)
+graphData.push(reaction)
+
+localStorage.setItem("reactionHistory",JSON.stringify(history))
+localStorage.setItem("reactionGraph",JSON.stringify(graphData))
+
+renderHistory()
+drawGraph()
+
+if(!best||reaction<best){
+
+best=reaction
+localStorage.setItem("bestReaction",reaction)
+
+document.getElementById("best").textContent=reaction+" ms"
+
+}
+
+}
+
+}
+
+document.addEventListener("keydown",e=>{
+if(e.code=="Space") gameBox.click()
+})
+
+/* CLEAR HISTORY */
+
+document.getElementById("clearHistory").onclick=function(){
+
+if(!confirm("Delete all reaction history?")) return
+
+history=[]
+localStorage.removeItem("reactionHistory")
+
+renderHistory()
+
+}
+
+/* CLEAR GRAPH */
+
+document.getElementById("clearGraph").onclick=function(){
+
+if(!confirm("Delete graph data?")) return
+
+graphData=[]
+localStorage.removeItem("reactionGraph")
+
+drawGraph()
+
+}
+
+/* CLEAR PROGRESS */
+
+document.getElementById("clearProgress").onclick=function(){
+
+if(!confirm("Delete ALL progress?")) return
+
+history=[]
+graphData=[]
+best=null
+
+localStorage.clear()
+
+renderHistory()
+drawGraph()
+
+document.getElementById("best").textContent="-"
+
+}
+
+/* PAGE REDIRECT BUTTON */
+
+document.getElementById("goGraph").onclick=function(){
+
+window.location.href="nothing6.html"
+
+}
+
+</script>
+
+</body>
+</html>
+

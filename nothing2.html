@@ -1,0 +1,224 @@
+<!DOCTYPE html><html>
+<head>
+    <link rel="icon" href="data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'>
+      <rect width='32' height='32' fill='black'/>
+      <text x='16' y='22' font-size='20' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>N</text>
+    </svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+/* ================= MOBILE FRIENDLY ================= */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    line-height: 1.5;
+}
+
+h1, h2, h3, p, button, input, select, textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button, input, select, textarea {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+form, section, article, div {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+/* Make typewriter, spin, font size, letters, counters readable */
+#typewriter, #spin, #weirdFont, #letters, #count, #reverse, #diceResult, #countdownDisplay, #useless {
+    word-break: break-word;
+}
+
+/* QR codes and canvas elements scale on mobile */
+#textQR, #linkQR, #appQR, canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Make buttons full width on small screens */
+@media (max-width: 600px) {
+    button, input, select, textarea {
+        width: auto; /* instead of 100% */
+        min-width: 120px; /* ensures they are big enough to tap */
+    }
+}
+    }
+}
+</style> 
+<title>Nothing - Page 2</title>
+<style>
+body{
+font-family: Arial;
+padding:20px;
+}section{
+margin-bottom:40px;
+}
+
+#runBtn{
+padding:10px;
+}
+
+</style>
+</head><body><a href="index.html">Go Back</a>
+
+<h1>Nothing Page 2</h1>
+<p>more useless nothings.</p><hr><section>
+<h3>Random Number</h3>
+<p id="randomNumber">0</p>
+<button onclick="document.getElementById('randomNumber').innerText = Math.floor(Math.random()*1000)">
+Random Number
+</button>
+</section><hr><section>
+<h3>Useless Progress</h3>
+<progress value="0" max="100" id="bar"></progress>
+<br><br>
+<button onclick="document.getElementById('bar').value += 10">
+Progress Nothing
+</button>
+</section><hr><section>
+<h3>A button</h3>
+<button id="runBtn"
+onmouseover="
+this.style.position='absolute';
+this.style.left=Math.random()*window.innerWidth+'px';
+this.style.top=Math.random()*window.innerHeight+'px';
+">
+I Can Move One Time
+</button>
+</section><hr><section>
+<h3>Emoji</h3>
+<p id="emoji">🙂</p>
+<button onclick="
+document.getElementById('emoji').innerText=
+['😂','💀','😎','🤯','🫠'][Math.floor(Math.random()*5)]
+">
+Emoji
+</button>
+</section><hr><section>
+<h3>Random Page Zoom</h3>
+<button onclick="document.body.style.zoom = Math.random()*2 + 0.5">
+Random Zoom
+</button>
+</section><hr><section>
+<h3>Fake Loading</h3>
+<p id="loading">Loading nothing...</p>
+<button onclick="
+setTimeout(()=>{
+document.getElementById('loading').innerText='Still nothing.'
+},2000)
+">
+Load
+</button>
+</section><hr><section>
+<h3>Random Border</h3>
+<button onclick="
+document.body.style.border='10px solid hsl('
++Math.random()*360+',100%,50%)'
+">
+Random Border
+</button>
+</section><hr><section>
+<h3>Button Counter</h3>
+<p id="clicks">0 clicks</p>
+<button onclick="
+let c=document.getElementById('clicks');
+let n=parseInt(c.innerText);
+c.innerText=(n+1)+' clicks'
+">
+Click Me
+</button>
+</section><hr><section>
+<h3>Flip Page</h3>
+<button onclick="document.body.style.transform='rotate(180deg)'">
+Flip Page
+</button>
+</section><hr><section>
+<h3>Random Wisdom</h3>
+<p id="randomText"></p>
+<button onclick="
+document.getElementById('randomText').innerText=
+['Nothing','Still nothing','Absolutely nothing','Why are you here?']
+[Math.floor(Math.random()*4)]
+">
+Generate Wisdom
+</button>
+</section><hr><section>
+<h3>The Most Honest Button</h3>
+<button onclick="">
+Do Nothing
+</button>
+</section>
+
+<hr><div class="dotGrid"></div>
+
+<style>
+.dotGrid{
+  display:grid;
+  grid-template-columns: repeat(20, 10px);
+  gap:10px;
+}
+
+.dotGrid::before{
+  content:"";
+}
+
+.dotGrid div{
+  width:10px;
+  height:10px;
+  background:black;
+  border-radius:50%;
+}
+</style>
+
+<script>
+const grid = document.querySelector(".dotGrid");
+
+for(let i=0;i<10;i++){
+  const dot = document.createElement("div");
+  grid.appendChild(dot);
+}
+</script>
+<hr><a href="nothing3.html">Go to Page 3</a>
+
+<style>
+*{
+transition: all 0.3s;
+}
+</style>
+
+<!-- Footer -->
+<footer style="text-align:center; color: gray; font-size: 14px; margin-top: 50px; padding: 20px 0;">
+  © 2026 TimoSites-Nothing. By TimoDoesDabs
+</footer>
+
+<script>
+// Prevent horizontal overflow
+window.addEventListener('resize', () => {
+    document.body.style.width = "100%";
+});
+
+// Enable vertical touch scroll
+document.body.style.touchAction = "pan-y";
+</script>
+
+</body>
+</html>

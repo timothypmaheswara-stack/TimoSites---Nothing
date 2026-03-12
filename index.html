@@ -1,0 +1,214 @@
+<!DOCTYPE html>    <html>    
+<head>
+    <link rel="icon" href="data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'>
+      <rect width='32' height='32' fill='black'/>
+      <text x='16' y='22' font-size='20' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>N</text>
+    </svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>TimoSites-Nothing</title>   
+    <style>
+/* ================= MOBILE FRIENDLY ================= */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    line-height: 1.5;
+}
+
+h1, h2, h3, p, button, input, select, textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button, input, select, textarea {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+form, section, article, div {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+/* Make typewriter, spin, font size, letters, counters readable */
+#typewriter, #spin, #weirdFont, #letters, #count, #reverse, #diceResult, #countdownDisplay, #useless {
+    word-break: break-word;
+}
+
+/* QR codes and canvas elements scale on mobile */
+#textQR, #linkQR, #appQR, canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Make buttons full width on small screens */
+@media (max-width: 600px) {
+    button, input, select, textarea {
+        width: auto; /* instead of 100% */
+        min-width: 120px; /* ensures they are big enough to tap */
+    }
+}
+    }
+}
+</style> 
+</head>    
+<body>    
+    <h1>Welcome To </h1>    
+<h2>Nothing</h2>    
+<p>The place with... basically nothing</p>
+<p><small>3  1  4  2 could be a random number, or is it?</small></p>
+<hr>   
+<img src=".trashed-1774966499-Yoqs+AAAAAZJREFUAwBN5412RPofpAAAAABJRU5ErkJggg==.png" alt="Nothing" width="200">    
+<p><hr></p><form>    
+    <label for="color">Color ID Picker:</label>    
+    <input type="color" id="color" name="color">    
+    <button type="button" onclick="alert('Color ID ' + document.getElementById('color').value)">Color ID</button>    
+</form>    <p><hr></p><h3>Upload an Image ↓↓</h3>  
+<input type="file" id="imageInput" accept="image/*">  
+<br><br>  
+<img id="preview" src="" alt="" width="300" style="vertical-align: middle;">  
+<button id="deleteImage" style="font-size:20px; display:none;">🗑️</button>  <p><hr></p><script>  
+const imageInput = document.getElementById('imageInput');  
+const preview = document.getElementById('preview');  
+const deleteBtn = document.getElementById('deleteImage');  
+
+function updateDeleteButton() {  
+    if(preview.src.startsWith("data:")){  
+        deleteBtn.style.display = "inline";  
+    } else {  
+        deleteBtn.style.display = "none";  
+    }  
+}  
+
+imageInput.addEventListener('change', function(event){  
+    const file = event.target.files[0];   
+    if(file){  
+        const reader = new FileReader();  
+        reader.onload = function(e){  
+            preview.src = e.target.result;  
+            updateDeleteButton();  
+        }  
+        reader.readAsDataURL(file);  
+    } else {  
+        preview.src = "";  
+        updateDeleteButton();  
+    }  
+});  
+
+deleteBtn.addEventListener('click', function(){  
+    const confirmDelete = confirm("Are you sure you wanna delete this 'nothing'?");  
+    if(confirmDelete){  
+        preview.src = "";  
+        imageInput.value = "";  
+        updateDeleteButton();  
+    }  
+});  
+
+updateDeleteButton();  
+</script>  <p></p><footer>    
+    <p>I told you there's nothing</p>    
+</footer>    <p><hr></p><section>    
+    <h2>Something?</h2>    
+    <p>Nothing.</p>    
+    <article>    
+        <h3>My Content</h3>    
+        <p>No content.</p>    
+    </article>    
+</section>    <p><hr></p><h2>What's Your Gender</h2>    <label><input type="radio" name="gender" value="Male"> Male</label>
+<label><input type="radio" name="gender" value="Female"> Female</label>
+
+<p id="savedChoice"></p>    <script>    
+function saveGender() {    
+    const radios = document.getElementsByName('gender');    
+    for (let radio of radios) {    
+        if (radio.checked) {    
+            localStorage.setItem('gender', radio.value);    
+            showGender();    
+            break;    
+        }    
+    }    
+}    
+
+function showGender() {    
+    const saved = localStorage.getItem('gender');    
+    if(saved){    
+        document.getElementById('savedChoice').innerText = 'You selected: ' + saved;    
+        const radios = document.getElementsByName('gender');    
+        for (let radio of radios) {    
+            radio.checked = (radio.value === saved);    
+        }    
+    }    
+}    
+
+const radios = document.getElementsByName('gender');    
+for (let radio of radios) {    
+    radio.addEventListener('change', saveGender);    
+}    
+
+showGender();    
+</script>   <p><hr></p><label><input type="checkbox" name="subscribe"> Are you leaving?</label>
+<label for="name"></label>
+
+<input type="text" id="name" name="name" placeholder="Answer here">    <p><hr></p><marquee>Nothing is happening here... Please don't do anything...</marquee>
+
+<p><hr></p><p id="typewriter"></p>  
+<script>  
+let text = "Absolutely nothing is happening...";  
+let i = 0;  
+function typeWriter(){  
+    if(i < text.length){  
+        document.getElementById("typewriter").innerHTML += text.charAt(i);  
+        i++;  
+        setTimeout(typeWriter, 100);  
+    }  
+}  
+typeWriter();  
+</script>  <p><hr></p><button onclick="alert(['😎','🫠','🥴','🫡','👀'][Math.floor(Math.random()*5)])">Emoji</button>
+
+<p><hr></p><p id="spin" style="display:inline-block;">Nothing spins here</p>  
+<button onclick="document.getElementById('spin').style.transform = 'rotate(' + Math.floor(Math.random()*360) + 'deg)'">Spin It</button>  <p><hr></p><p id="weirdFont">This is unpredictable</p>  
+<button onclick="document.getElementById('weirdFont').style.fontSize = Math.floor(Math.random()*50+10)+'px'">Random Font Size</button>  <p><hr></p><img src=".trashed-1774948794-file_000000006c1471f8a27f8ddd8e2d34de.png" width="100" draggable="true">  <p><hr></p><p id="letters"></p>  
+<button onclick="let l='ABCDEFGHIJKLMNOPQRSTUVWXYZ'; let s=''; for(let i=0;i<10;i++){ s+=l.charAt(Math.floor(Math.random()*l.length)); } document.getElementById('letters').innerText=s;">Random Letters</button>  <p><hr></p><progress id="uselessBar" value="0" max="100"></progress>
+<button onclick="let b=document.getElementById('uselessBar'); b.value = Math.floor(Math.random()*101)">Random Progress</button>
+
+<p><hr></p><p id="count">10</p>  
+<button onclick="let c=document.getElementById('count'); c.innerText = Math.floor(Math.random()*11)">Nothing? Maybe</button>  <p><hr></p><p id="reverse">Nothing!</p>  
+<button onclick="let t=document.getElementById('reverse'); t.innerText=t.innerText.split('').reverse().join('')">For real?</button>  <p><hr></p><a href="nothing2.html">Go to Page 2</a>
+
+<style>
+*{
+transition: all 0.3s;
+}
+</style>
+
+<!-- Footer -->
+<footer style="text-align:center; color: gray; font-size: 14px; margin-top: 50px; padding: 20px 0;">
+  © 2026 TimoSites-Nothing. By TimoDoesDabs
+</footer>
+
+<script>
+// Prevent horizontal overflow
+window.addEventListener('resize', () => {
+    document.body.style.width = "100%";
+});
+
+// Enable vertical touch scroll
+document.body.style.touchAction = "pan-y";
+</script>
+
+</body>    
+</html>
